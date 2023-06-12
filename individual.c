@@ -1,20 +1,5 @@
 
 /***********Solution encoding**************/
-int sqr(int a) {
-    return a*a;
-}
-
-int Distance(int x1, int y1, int x2, int y2) {
-    return (sqrt(sqr(y2 - y1) + sqr(x2 - x1))*1000);    
-}
-
-int Emission(int x1, int y1, int x2, int y2) {
-    return (Distance(x1,y1,x2,y2)/1000)*100*10;
-}
-
-int Travel_time(int x1, int y1, int x2, int y2) {
-    return ((Distance(x1,y1,x2,y2)/750)); 
-}
 
 int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c])
 {int i,j,a,a1,s,k,v,som,som1,som2,l,h;
