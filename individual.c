@@ -88,7 +88,7 @@ int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c], int dema
                             w[i][a]=0;i--;
                             }
                      }
-                     else /*** if the workload or the capacity of the packages are exceeded, we choose other packages ****/
+                     else /*** In case the workload or package capacity is exceeded, we opt for alternative packages that still adhere to the continuity of care ****/
                         {
                             w[i][a]=0;
                             goto A0;
@@ -129,7 +129,7 @@ int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c], int dema
                         }
                         }
                         }
-                        if (som1<=WLD[a] && som2<=WLD[a1] && som1_d<=ca[a] && som2_d<=ca[a1] ) /*** if the workload & capacity of both packages isn't exceeded yet***/
+                        if (som1<=WLD[a] && som2<=WLD[a1] && som1_d<=ca[a] && som2_d<=ca[a1] ) /*** if the workload & capacity of both packages aren't exceeded yet***/
                             {
                         s=0;
                         for(j=0;j<i;j++)
@@ -208,7 +208,7 @@ int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c], int dema
                                 i--;
                         }
         }
-        else /*** if the workload or the capacity of the packages are exceeded, we choose other packages ****/
+        else /***In case the workload or package capacity is exceeded, we opt for alternative packages that still adhere to the continuity of care  ****/
         {
             w[i][a1]=0;
             w[i][a]=0;
