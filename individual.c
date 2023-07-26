@@ -1,7 +1,7 @@
 
 /***********Solution encoding**************/
 int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c], int demand[c], int capa[p])
-{int i,j,a,a1,s,k,v,som,som1,som2,l,h;
+{int i,j,a,a1,s,k,v,som,som_d,som1,som1_d,som2,som2_d,l,h;
     for(i=0;i<c;i++)
         {
             for(j=0;j<p;j++)
