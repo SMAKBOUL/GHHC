@@ -1,7 +1,6 @@
 
 /***********Solution encoding**************/
-
-int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c])
+int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c], int demand[c], int capa[p])
 {int i,j,a,a1,s,k,v,som,som1,som2,l,h;
     for(i=0;i<c;i++)
         {
@@ -14,24 +13,25 @@ int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c])
         {
             if (syn[i]==1)/***begin(sychronization=1)***/
         {
-            A0: a=rand()%20;
+            A0: a=rand()%12;
             if (av[i][a]==0)
            {
                goto A0;
            }
            w[i][a]=(rand()%(end_time[i]-start_time[i])+start_time[i]);
-
                 if (w[i][a]!=0)
                     {
                         som=0;
+                        som_d=0
                         for (l=0;l<i;l++) {
                             if (w[l][a]!=0)
                         {
                             som=som+service_time[l]+Travel_time(XC[i],YC[l],XC[i],YC[l]);
+                            som_d=som_d+demand[l];
                         }
                         }
                         }
-                        if (som<=WLD[a]) /*** if the workload of the package isn't exceeded yet***/
+                        if (som<=WLD[a] && som_d<=capa[a]) /*** if the workload & capacity of the package aren't exceeded yet***/
                             {
                           int v=0;
                         for(j=0;j<i;j++)
@@ -88,7 +88,7 @@ int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c])
                             w[i][a]=0;i--;
                             }
                      }
-                     else /*** if the workload of the packages is exceeded, we choose other packages ****/
+                     else /*** if the workload or the capacity of the packages are exceeded, we choose other packages ****/
                         {
                             w[i][a]=0;
                             goto A0;
@@ -96,8 +96,8 @@ int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c])
                      }/***end(syn=1)****/
                      else if (syn[i]==2)/***begin(sychronization)=2***/
                                                     {
-                                                        B:a=rand()%20;
-                     a1=rand()%20;
+                                                        B:a=rand()%12;
+                     a1=rand()%12;
                      if (a==a1)
                     { goto B;
                     }
@@ -109,23 +109,27 @@ int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c])
                     if (w[i][a]!=0)
                         {
                         som1=0;
+                        som1_d=0;
                         for (l=0;l<i;l++)
                         {
                             if (w[l][a]!=0)
                         {som1=som1+service_time[l]+Travel_time(XC[i],YC[l],XC[i],YC[l]);
+                         som1_d=som1_d+demand[l];
                         }
                         }
                         }
                         if (w[i][a1]!=0)
                             {
                         som2=0;
+                        som2_d=0;
                         for (l=0;l<i;l++)
                         {if (w[l][a1]!=0)
                         {som2=som2+service_time[l]+Travel_time(XC[l],YC[i],XC[l],YC[i]);
+                         som2_d=som2_d+demand[l];
                         }
                         }
                         }
-                        if (som1<=WLD[a] && som2<=WLD[a1]) /*** if the workload of both packages isn't exceeded yet***/
+                        if (som1<=WLD[a] && som2<=WLD[a1] && som1_d<=ca[a] && som2_d<=ca[a1] ) /*** if the workload & capacity of both packages isn't exceeded yet***/
                             {
                         s=0;
                         for(j=0;j<i;j++)
@@ -204,11 +208,12 @@ int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c])
                                 i--;
                         }
         }
-        else /*** if the workload of the packages is exceeded, we choose other packages ****/
+        else /*** if the workload or the capacity of the packages are exceeded, we choose other packages ****/
         {
             w[i][a1]=0;
             w[i][a]=0;
             goto B;
         }
-        } /***end(syn=2)***/
-        }
+       } /***end(syn=2)***/
+     }
+     }
