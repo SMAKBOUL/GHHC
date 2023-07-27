@@ -1,10 +1,18 @@
 /***comments for the reader***/
 
-/*The provided encoding solution is a method for generating an individual in the context of NSGA-II to solve the scheduling problem. The objective is to assign patients' care to caregivers while satisfying various constraints, including synchronization, continuity of care, workload, and capacity limitations.
-The encoding solution uses a two-dimensional array "w[i][j]" to represent the assignments of cares to caregivers. It initializes all elements of this array to zero. The algorithm then iterates over the patients (denoted by "i") and their respective synchronization parameters ("syn[i]"), which indicate if a care requires one caregiver (syn=1) or two caregivers (syn=2).
-For the case when syn=1, the algorithm randomly selects a caregiver ("a") from the available pool ("av[i][a]=1") and assigns the care's start time based on a random value between the specified start and end time. It then checks if this assignment satisfies the workload and capacity constraints for the selected caregiver and whether it maintains the continuity of care for each patient. If any of these conditions are not met, the algorithm retries the assignment process until a valid one is found.
-Similarly, for the case when syn=2 (two caregivers required for synchronization), the algorithm randomly selects two caregivers ("a" and "a1") from the available pool and assigns the care's start time for both caregivers based on random values within the specified start and end time. It then verifies if the workload and capacity constraints are satisfied for both caregivers and if the continuity of care is maintained for each patient. 
-If any of these conditions are not met, the algorithm retries the assignment process until a valid one is found. In situations where the workload or package capacity is exceeded, the algorithm reassigns the care to an alternative package while still adhering to the continuity of care constraints.***/
+
+/***The provided encoding solution is a method for generating an individual in the context of NSGA-II to solve the scheduling problem.
+ The objective is to assign patients' care to caregivers while satisfying various constraints, including synchronization, continuity of care, workload, and capacity limitations.
+The encoding solution uses a two-dimensional array "w[i][j]" to represent the assignments of cares to caregivers. It initializes all elements of this array to zero. 
+The algorithm then iterates over the patients (denoted by "i") and their respective synchronization parameters ("syn[i]"), which indicate if a care requires one caregiver (syn=1) or two caregivers (syn=2).
+For the case when syn=1, the algorithm randomly selects a caregiver ("a") from the available pool ("av[i][a]=1") and assigns the care's start time based on a random value between the specified start and end time. 
+It then checks if this assignment satisfies the workload and capacity constraints for the selected caregiver and whether it maintains the continuity of care for each patient. 
+If any of these conditions are not met, the algorithm retries the assignment process until a valid one is found.
+Similarly, for the case when syn=2 (two caregivers required for synchronization), the algorithm randomly selects two caregivers ("a" and "a1") from the available pool and assigns the care's
+ start time for both caregivers based on random values within the specified start and end time. 
+It then verifies if the workload and capacity constraints are satisfied for both caregivers and if the continuity of care is maintained for each patient. 
+If any of these conditions are not met, the algorithm retries the assignment process until a valid one is found. 
+In situations where the workload or package capacity is exceeded, the algorithm reassigns the care to an alternative package while still adhering to the continuity of care constraints.***/
 
 /***********Solution encoding**************/
 int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c], int demand[c], int capa[p])
