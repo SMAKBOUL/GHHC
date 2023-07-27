@@ -129,7 +129,7 @@ int individu(int syn[c], int av[c][p], int WLD[p], int service_time[c], int dema
                         }
                         }
                         }
-                        if (som1<=WLD[a] && som2<=WLD[a1] && som1_d<=ca[a] && som2_d<=ca[a1] ) /*** if the workload & capacity of both packages aren't exceeded yet***/
+                        if (som1<=WLD[a] && som2<=WLD[a1] && som1_d<=capa[a] && som2_d<=capa[a1] ) /*** if the workload & capacity of both packages aren't exceeded yet***/
                             {
                         s=0;
                         for(j=0;j<i;j++)
